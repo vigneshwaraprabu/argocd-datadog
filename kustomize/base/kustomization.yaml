@@ -13,4 +13,23 @@ resources:
 generatorOptions:
   disableNameSuffixHash: true
 
+patches:
+  - target:
+      kind: ConfigMap
+      name: datadog-ami-age-check
+    patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "0"
 
+  - target:
+      kind: DaemonSet
+      name: datadog-agent
+    patch: |-
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
