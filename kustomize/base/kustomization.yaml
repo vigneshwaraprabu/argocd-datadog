@@ -21,6 +21,7 @@ patches:
       apiVersion: v1
       kind: ConfigMap
       metadata:
+        name: datadog-ami-age-check
         annotations:
           argocd.argoproj.io/sync-wave: "0"
 
@@ -31,5 +32,6 @@ patches:
       apiVersion: apps/v1
       kind: DaemonSet
       metadata:
+        name: datadog-agent
         annotations:
           argocd.argoproj.io/sync-wave: "1"
