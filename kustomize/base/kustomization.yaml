@@ -10,7 +10,7 @@ resources:
   - ami_age_conf.yaml
   - datadog-agent.yaml
 
-# generatorOptions:
-#   disableNameSuffixHash: true
+generatorOptions:
+  disableNameSuffixHash: true
 
 
