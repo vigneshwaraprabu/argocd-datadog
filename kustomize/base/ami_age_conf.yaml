@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-ami-age-conf
+data:
+  conf.yaml: |
+    init_config:
+
+    instances:
+      - {}

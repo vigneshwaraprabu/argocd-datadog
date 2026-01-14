@@ -1,0 +1,41 @@
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: default
+spec:
+  global:
+    clusterName: poc-cluster1
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    tags:
+      - env:dev
+
+  features:
+    clusterChecks:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+
+  override:
+    nodeAgent:
+      volumes:
+        - name: ami-age-check
+          configMap:
+            name: datadog-ami-age-check
+
+        - name: ami-age-conf
+          configMap:
+            name: datadog-ami-age-conf
+
+      containers:
+        agent:
+          volumeMounts:
+            - name: ami-age-check
+              mountPath: /etc/datadog-agent/checks.d
+
+            - name: ami-age-conf
+              mountPath: /etc/datadog-agent/conf.d/eks_ami_age.d
